@@ -15,5 +15,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char **find_path(char *envp[]);
 char *find_command(char **paths, const char *cmd);
 void	ft_putendl_fd(char *s, int fd);
-char *print_error(char *msg, int exit_code);
-
+void *print_error(char *msg, int exit_code);
+char	**parse_command(const char *command);
+void	child_process(int *pipefd, char **argv, char **envp);
+void	parent_process(int *pipefd, char **argv, char **envp);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ituren <ituren@student.42.fr>              +#+  +:+       +#+        */
+/*   By: iremturen <iremturen@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 15:27:14 by ituren            #+#    #+#             */
-/*   Updated: 2025/11/03 19:01:13 by ituren           ###   ########.fr       */
+/*   Updated: 2025/11/04 16:17:57 by iremturen        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,18 @@ char *find_command(char **paths, const char *cmd)
 {
 	int i;
 	char *path;
+	int length;
 
 	i = 0;
 	while (paths[i])
 	{
-		path = malloc(paths[i] + ft_strlen(cmd) + 2);
+		length = paths[i] + ft_strlen(cmd) + 2;
+		path = malloc(length);
 		if (!path)
 			return (NULL);
-		ft_strlcpy(path, paths[i],ft_strlen(path));
-		ft_strlcat(path, "/", 1);
-		ft_strlcat(path, cmd, ft_strlen(cmd));
+		ft_strlcpy(path, paths[i], length);
+		ft_strlcat(path, "/", length);
+		ft_strlcat(path, cmd, length);
 		if (access(path, F_OK) == 0)
 		{
 			if(access(path, X_OK) == 0)
