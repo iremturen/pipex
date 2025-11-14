@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iremturen <iremturen@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ituren <ituren@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:48:49 by ituren            #+#    #+#             */
-/*   Updated: 2025/11/09 14:27:46 by iremturen        ###   ########.fr       */
+/*   Updated: 2025/11/14 17:48:01 by ituren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@ static void	error_check(int argc, const char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		print_error(strerror(errno), 1);
+	close(fd);
 	if (access(argv[4], F_OK) == 0)
 	{
 		fd = open(argv[4], O_WRONLY);
 		if (fd == -1)
 			print_error(strerror(errno), 1);
 	}
+	close(fd);
 }
 
 char	**parse_command(const char *command)

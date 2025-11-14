@@ -6,7 +6,7 @@
 /*   By: ituren <ituren@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 14:00:32 by ituren            #+#    #+#             */
-/*   Updated: 2025/11/11 14:00:33 by ituren           ###   ########.fr       */
+/*   Updated: 2025/11/14 17:45:50 by ituren           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@ void	child1_process(int *pipefd, const char **argv, char **envp) //infile → co
 		print_error("Command not found\n", 127);
 	dup2(fd_in, STDIN_FILENO);
 	dup2(pipefd[1], STDOUT_FILENO);
-	close(fd_in);
+	// close(fd_in);
 	close(pipefd[0]);
 	close(pipefd[1]);
+	close(fd_in);
 	execve(cmd_path, cmd, envp);
 	print_error("Command execution failed\n", 127);
 }
@@ -58,9 +59,9 @@ void	child2_process(int *pipefd, const char **argv, char **envp) //pipe oku → 
 		print_error("Command not found\n", 127);
 	dup2(pipefd[0], STDIN_FILENO);
 	dup2(fd_out, STDOUT_FILENO);
-	close(fd_out);
 	close(pipefd[1]);
 	close(pipefd[0]);
+	close(fd_out);
 	execve(cmd_path, cmd, envp);
 	print_error("Command execution failed\n", 127);
 }
